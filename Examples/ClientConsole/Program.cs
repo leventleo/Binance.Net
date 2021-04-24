@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using Binance.Net;
@@ -15,15 +16,17 @@ namespace BinanceAPI.ClientConsole
     {
         static void Main(string[] args)
         {
+            var apikey = ConfigurationManager.AppSettings.Get("apiKey");
+            var secret = ConfigurationManager.AppSettings.Get("apiKey");
             BinanceClient.SetDefaultOptions(new BinanceClientOptions()
             {
-                ApiCredentials = new ApiCredentials("APIKEY", "APISECRET"),
+                ApiCredentials = new ApiCredentials(apikey, secret),
                 LogVerbosity = LogVerbosity.Debug,
                 LogWriters = new List<TextWriter> { Console.Out }
             });
             BinanceSocketClient.SetDefaultOptions(new BinanceSocketClientOptions()
             {
-                ApiCredentials = new ApiCredentials("APIKEY", "APISECRET"),
+                ApiCredentials = new ApiCredentials(apikey, secret),
                 LogVerbosity = LogVerbosity.Debug,
                 LogWriters = new List<TextWriter> { Console.Out }
             });
@@ -39,33 +42,34 @@ namespace BinanceAPI.ClientConsole
                 // Spot.UserStream | Spot user stream endpoints. Should be used to subscribe to a user stream with the socket client
                 client.Spot.UserStream.StartUserStream();
                 // Spot.Futures | Transfer to/from spot from/to the futures account + cross-collateral endpoints
-                client.Spot.Futures.TransferFuturesAccount("ASSET", 1, FuturesTransferType.FromSpotToUsdtFutures);
 
-                // FuturesCoin | Coin-M general endpoints
-                client.FuturesCoin.GetPositionInformation();
-                // FuturesCoin.Market | Coin-M futures market endpoints
-                client.FuturesCoin.Market.GetBookPrices("BTCUSD");
-                // FuturesCoin.Order | Coin-M futures order endpoints
-                client.FuturesCoin.Order.GetMyTrades();
-                // FuturesCoin.Account | Coin-M account info
-                client.FuturesCoin.Account.GetAccountInfo();
-                // FuturesCoin.System | Coin-M system endpoints
-                client.FuturesCoin.System.GetExchangeInfo();
-                // FuturesCoin.UserStream | Coin-M user stream endpoints. Should be used to subscribe to a user stream with the socket client
-                client.FuturesCoin.UserStream.StartUserStream();
+                //client.Spot.Futures.TransferFuturesAccount("ASSET", 1, FuturesTransferType.FromSpotToUsdtFutures);
 
-                // FuturesUsdt | USDT-M general endpoints
-                client.FuturesUsdt.GetPositionInformation();
-                // FuturesUsdt.Market | USDT-M futures market endpoints
-                client.FuturesUsdt.Market.GetBookPrices("BTCUSDT");
-                // FuturesUsdt.Order | USDT-M futures order endpoints
-                client.FuturesUsdt.Order.GetMyTrades("BTCUSDT");
-                // FuturesUsdt.Account | USDT-M account info
-                client.FuturesUsdt.Account.GetAccountInfo();
-                // FuturesUsdt.System | USDT-M system endpoints
-                client.FuturesUsdt.System.GetExchangeInfo();
-                // FuturesUsdt.UserStream | USDT-M user stream endpoints. Should be used to subscribe to a user stream with the socket client
-                client.FuturesUsdt.UserStream.StartUserStream();
+                //// FuturesCoin | Coin-M general endpoints
+                //client.FuturesCoin.GetPositionInformation();
+                //// FuturesCoin.Market | Coin-M futures market endpoints
+                //client.FuturesCoin.Market.GetBookPrices("BTCUSD");
+                //// FuturesCoin.Order | Coin-M futures order endpoints
+                //client.FuturesCoin.Order.GetMyTrades();
+                //// FuturesCoin.Account | Coin-M account info
+                //client.FuturesCoin.Account.GetAccountInfo();
+                //// FuturesCoin.System | Coin-M system endpoints
+                //client.FuturesCoin.System.GetExchangeInfo();
+                //// FuturesCoin.UserStream | Coin-M user stream endpoints. Should be used to subscribe to a user stream with the socket client
+                //client.FuturesCoin.UserStream.StartUserStream();
+
+                //// FuturesUsdt | USDT-M general endpoints
+                //client.FuturesUsdt.GetPositionInformation();
+                //// FuturesUsdt.Market | USDT-M futures market endpoints
+                //client.FuturesUsdt.Market.GetBookPrices("BTCUSDT");
+                //// FuturesUsdt.Order | USDT-M futures order endpoints
+                //client.FuturesUsdt.Order.GetMyTrades("BTCUSDT");
+                //// FuturesUsdt.Account | USDT-M account info
+                //client.FuturesUsdt.Account.GetAccountInfo();
+                //// FuturesUsdt.System | USDT-M system endpoints
+                //client.FuturesUsdt.System.GetExchangeInfo();
+                //// FuturesUsdt.UserStream | USDT-M user stream endpoints. Should be used to subscribe to a user stream with the socket client
+                //client.FuturesUsdt.UserStream.StartUserStream();
 
                 // General | General/account endpoints
                 client.General.GetAccountInfo();
@@ -73,28 +77,28 @@ namespace BinanceAPI.ClientConsole
                 // Lending | Lending endpoints
                 client.Lending.GetFlexibleProductList();
 
-                // Margin | Margin general/account info
-                client.Margin.GetMarginAccountInfo();
-                // Margin.Market | Margin market endpoints
-                client.Margin.Market.GetMarginPairs();
-                // Margin.Order | Margin order endpoints
-                client.Margin.Order.GetAllMarginAccountOrders("BTCUSDT");
-                // Margin.UserStream | Margin user stream endpoints. Should be used to subscribe to a user stream with the socket client
-                client.Margin.UserStream.StartUserStream();
-                // Margin.IsolatedUserStream | Isolated margin user stream endpoints. Should be used to subscribe to a user stream with the socket client
-                client.Margin.IsolatedUserStream.StartIsolatedMarginUserStream("BTCUSDT");
+                //// Margin | Margin general/account info
+                //client.Margin.GetMarginAccountInfo();
+                //// Margin.Market | Margin market endpoints
+                //client.Margin.Market.GetMarginPairs();
+                //// Margin.Order | Margin order endpoints
+                //client.Margin.Order.GetAllMarginAccountOrders("BTCUSDT");
+                //// Margin.UserStream | Margin user stream endpoints. Should be used to subscribe to a user stream with the socket client
+                //client.Margin.UserStream.StartUserStream();
+                //// Margin.IsolatedUserStream | Isolated margin user stream endpoints. Should be used to subscribe to a user stream with the socket client
+                //client.Margin.IsolatedUserStream.StartIsolatedMarginUserStream("BTCUSDT");
 
-                // Mining | Mining endpoints
-                client.Mining.GetMiningCoinList();
+                //// Mining | Mining endpoints
+                //client.Mining.GetMiningCoinList();
 
-                // SubAccount | Sub account management
-                client.SubAccount.TransferSubAccount("fromEmail", "toEmail", "asset", 1);
+                //// SubAccount | Sub account management
+                //client.SubAccount.TransferSubAccount("fromEmail", "toEmail", "asset", 1);
 
-                // Brokerage | Brokerage management
-                client.Brokerage.CreateSubAccountAsync();
+                //// Brokerage | Brokerage management
+                //client.Brokerage.CreateSubAccountAsync();
 
-                // WithdrawDeposit | Withdraw and deposit endpoints
-                client.WithdrawDeposit.GetWithdrawalHistory();
+                //// WithdrawDeposit | Withdraw and deposit endpoints
+                //client.WithdrawDeposit.GetWithdrawalHistory();
             }
 
             var socketClient = new BinanceSocketClient();
